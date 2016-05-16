@@ -1,0 +1,57 @@
+
+
+
+<!-- Datepicker -->
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<form class="form-inline" action="jasper-stats" method="POST">
+  <div class="form-group">
+    <label for="start_date">Start Date</label>
+    <input type="text" class="form-control" id="jreports_start_date" placeholder="Start Date" name="start_date">
+  </div>
+  <div class="form-group">
+    <label for="end_date">End Date</label>
+    <input type="text" class="form-control" id="jreports_end_date" placeholder="End Date" name="end_date">
+  </div>
+  <button type="submit" class="btn btn-primary">Search Dates</button>
+</form>
+   <script type="text/javascript">
+            
+
+
+            $(function() {
+                $('input[name="start_date"]').datepicker({
+                    <?php
+                    if ($config['min'])
+                        echo "minDate: new Date({$config['min']}000),";
+                    if ($config['max'])
+                        echo "maxDate: new Date({$config['max']}000),";
+                    elseif (!$config['future'])
+                        echo "maxDate: new Date().getTime(),";
+                    ?>
+                    numberOfMonths: 2,
+                    showButtonPanel: true,
+                    buttonImage: '/osticketdev/images/cal.png',
+                    showOn:'both',
+                    dateFormat: 'yy-mm-dd'
+                });
+				$('input[name="end_date"]').datepicker({
+                    <?php
+                    if ($config['min'])
+                        echo "minDate: new Date({$config['min']}000),";
+                    if ($config['max'])
+                        echo "maxDate: new Date({$config['max']}000),";
+                    elseif (!$config['future'])
+                        echo "maxDate: new Date().getTime(),";
+                    ?>
+                    numberOfMonths: 2,
+                    showButtonPanel: true,
+                    buttonImage: '/osticketdev/images/cal.png',
+                    showOn:'both',
+                    dateFormat: 'yy-mm-dd',
+					buttonText: 'End Date'
+                });
+            });
+
+  </script>		
