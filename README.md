@@ -18,7 +18,8 @@ staff/header.inc.php
 
 staff/templates/navigation.tmpl.php
 
-Did this, https://github.com/osTicket/osTicket/issues/2349
+Did this, https://github.com/osTicket/osTicket/issues/2349, and also did this to staff.inc.php and scp/login.php.
+
 
 Changed all this because this was the only way I could get all the resources to load.  This is a alpha, so it will be sketchy to run at first.
 
