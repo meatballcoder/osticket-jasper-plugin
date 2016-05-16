@@ -20,13 +20,12 @@ staff/templates/navigation.tmpl.php
 
 Did this, https://github.com/osTicket/osTicket/issues/2349
 
-
-This was the only way I could get all the resources to load.  This is a alpha, so it will be sketchy to run at first.
+Changed all this because this was the only way I could get all the resources to load.  This is a alpha, so it will be sketchy to run at first.
 
 It requires the php webpage exist on the same server as the report server.  If it does not you can change help-topics.php to point to your server.  I have not yet gottent the plugin to read the value for the server from the staff menu.
 
 The report in question is also included.  This assumes you have the Jasper Reports Server Community Edition and have configured it and have it working the way the php file expects.  Please review the code.  It is very short.
 
-
+I do not know why yet, but sometimes I have to hit refresh when the search pages comes up to show the calendar images, so you can pick a date.
 
 
