@@ -6,6 +6,12 @@ Based off the unofficial osTicket Plugin Tutorial for ostEquipment (thank you).
 
 Installation
 
+You need to install the jaspersoft php library.  I used composer.
+
+http://community.jaspersoft.com/wiki/php-client-sample-code
+
+https://github.com/Jaspersoft/jrs-rest-php-client
+
 Copy dispatcher.php from scp/apps to scp.
 
 Drop jasper-reports into the plugin folder
