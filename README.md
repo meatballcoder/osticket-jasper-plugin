@@ -4,35 +4,29 @@ This is a Jasper Reports plugin for osTicket 1.9.x.  It has been used with Commu
 
 Based off the unofficial osTicket Plugin Tutorial for ostEquipment (thank you).
 
-Installation
+##Installation
 
-You need to install the jaspersoft php library.  I used composer.
+- You need to install the jaspersoft php library.  I used composer.
+  - http://community.jaspersoft.com/wiki/php-client-sample-code
+  - https://github.com/Jaspersoft/jrs-rest-php-client
 
-http://community.jaspersoft.com/wiki/php-client-sample-code
+- Copy dispatcher.php from scp/apps to scp.
 
-https://github.com/Jaspersoft/jrs-rest-php-client
+- Drop jasper-reports into the plugin folder
 
-Copy dispatcher.php from scp/apps to scp.
+- I made changes to:
 
-Drop jasper-reports into the plugin folder
+  - class.osticket.php
+  - staff/header.inc.php
+  - staff/templates/navigation.tmpl.php
+  
+- Did this, https://github.com/osTicket/osTicket/issues/2349, and also did this to staff.inc.php and scp/login.php.
 
-I made changes to:
+- I based the report query off of information I saw here, but I cleaned it up.  Just wanted to give credit.  https://github.com/elbobyhn/ReporteriaFinalOSTICKETS
 
-class.osticket.php
+**NOTE:**  The SQL in my report will be useful to you, but you will have to look at it, particularly this line:
 
-staff/header.inc.php
-
-staff/templates/navigation.tmpl.php
-
-Did this, https://github.com/osTicket/osTicket/issues/2349, and also did this to staff.inc.php and scp/login.php.
-
-I based the report query off of information I saw here, but I cleaned it up.  Just wanted to give credit.
-
-https://github.com/elbobyhn/ReporteriaFinalOSTICKETS
-
-NOTE:  The SQL in my report will be useful to you, but you will have to look at it, particularly this line:
-
- osticket1913_list_items lsit ON SUBSTRING_INDEX(tcd.location, ' ', 1) = lsit.id
+ - - ost_list_items lsit ON SUBSTRING_INDEX(tcd.location, ' ', 1) = lsit.id
  
  list items are unique for your Enterprise.  I have a list named location.  You may not have any list.  Whatever you do, the Jasper Report included here will not work, until you adjust the SQL to match your osTicket table data.
 
