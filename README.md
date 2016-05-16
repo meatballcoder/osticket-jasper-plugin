@@ -35,4 +35,4 @@ The report in question is also included.  This assumes you have the Jasper Repor
 
 I do not know why yet, but sometimes I have to hit refresh when the search pages comes up to show the calendar images, so you can pick a date.
 
-
+This is not yet a full suite.  It is an alpha.  It works and will show the way to make an integrated plugin.  However, be very careful when you upgrade osTicket, as I changed the files above.  They will surely be overwritten in a standard upgrade.
