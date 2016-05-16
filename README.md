@@ -7,13 +7,17 @@ Based off the unofficial osTicket Plugin Tutorial for ostEquipment (thank you).
 Installation
 
 Copy dispatcher.php from scp/apps to scp.
+
 Drop jasper-reports into the plugin folder
 
 I made changes to:
 
 class.osticket.php
+
 staff/header.inc.php
+
 staff/templates/navigation.tmpl.php
+
 
 
 This was the only way I could get all the resources to load.  This is a alpha, so it will be sketchy to run at first.
