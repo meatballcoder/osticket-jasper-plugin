@@ -30,6 +30,12 @@ I based the report query off of information I saw here, but I cleaned it up.  Ju
 
 https://github.com/elbobyhn/ReporteriaFinalOSTICKETS
 
+NOTE:  The SQL in my report will be useful to you, but you will have to look at it, particularly this line:
+
+ osticket1913_list_items lsit ON SUBSTRING_INDEX(tcd.location, ' ', 1) = lsit.id
+ 
+ list items are unique for your Enterprise.  I have a list named location.  You may not have any list.  Whatever you do, the Jasper Report included here will not work, until you adjust the SQL to match your osTicket table data.
+
 
 Changed all this because this was the only way I could get all the resources to load.  This is a alpha, so it will be sketchy to run at first.
 
