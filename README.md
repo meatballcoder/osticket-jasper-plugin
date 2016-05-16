@@ -18,6 +18,7 @@ staff/header.inc.php
 
 staff/templates/navigation.tmpl.php
 
+Did this, https://github.com/osTicket/osTicket/issues/2349
 
 
 This was the only way I could get all the resources to load.  This is a alpha, so it will be sketchy to run at first.
