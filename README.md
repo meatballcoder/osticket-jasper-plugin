@@ -5,6 +5,7 @@ This is a Jasper Reports plugin for osTicket 1.9.x.  It has been used with Commu
 Based off the unofficial osTicket Plugin Tutorial for ostEquipment (thank you).
 
 Installation
+
 Copy dispatcher.php from scp/apps to scp.
 Drop jasper-reports into the plugin folder
 
