@@ -1,10 +1,28 @@
 <?PHP
 namespace controller;
+		
+
+require_once JASPER_REPORTS_PLUGIN_ROOT . "/vendor/autoload.php";
+require_once JASPER_REPORTS_VIEWS . "autoloaderviews.php";
+
+use Jaspersoft\Client\Client;
+use Jaspersoft\Service\Criteria\RepositorySearchCriteria;
+use views\JasperRenderView;
+
 
 class JasperController extends JasperMasterController {
+	private $renderer;
+	
+	private $c;
+	
 	function __construct() {
 		
-     	//Remember that you don't have to declare "new" to get the class to instiate.  osTicket does that already;
+		$this->c = new Client(
+						"http://localhost:8080/jasperserver",
+						"jasperadmin",
+						"jasperadmin"
+					);
+		$this->renderer = new JasperRenderView();
     }
 	public function searchAction(){
 		global $ost, $msg, $cfg; //I had to put these in all the functions
@@ -12,35 +30,33 @@ class JasperController extends JasperMasterController {
 		require('staff.inc.php');
 		include(STAFFINC_DIR.'header.inc.php');
 		require(JASPER_REPORTS_VIEWS.'osticket-reports.html');
-		//include(STAFFINC_DIR.'footer.inc.php');
 	}
-	//this is how you get the URL querystring, in order, based upon your regex in the initial callbackDispatch function, initial plugin file, for the scp signal;
-	public function getTicketStats($start_date = 0, $end_date=1,$args = array()){
-		//kept the variables in for posterity; I changed it to post;
+
+	public function getTicketStats(){
 		global $ost, $msg, $cfg;
+		
 		$ost->setPluginInstance(OST_WEB_ROOT.'scp/');  //based upon my changing the $ost class
-		require('staff.inc.php');
-		include(STAFFINC_DIR.'header.inc.php');
-		require(JASPER_REPORTS_VIEWS.'help-topics.php');
-		//include(STAFFINC_DIR.'footer.inc.php');
-	}
-	/**
-	* Returns the calling function through a backtrace
-	*/
-	//put this in for debugging
-	function get_calling_function() {
-		// a funciton x has called a function y which called this
-		// see stackoverflow.com/questions/190421
-		$caller = debug_backtrace();
-		$caller = $caller[2];
-		$r = $caller['function'] . '()';
-		if (isset($caller['class'])) {
-			$r .= ' in ' . $caller['class'];
+
+		$report_format=$_POST['report_format'];
+		
+		if ($report_format != "HTML"){
+			$report_format="PDF";
 		}
-		if (isset($caller['object'])) {
-			$r .= ' (' . get_class($caller['object']) . ')';
-		}
-		return $caller['class'] . '->' . $r;
+
+		$start_date=$_POST['start_date'];
+		$end_date=$_POST['end_date'];
+
+		$js = $this->c->jobService();               
+		$this->c->setRequestTimeout(60); 
+		$info = $this->c->serverInfo();
+
+		$controls = array(
+		   'ticketStartDate' => array($start_date),
+		   'ticketEndDate' => array($end_date)
+		);
+
+		$report = $this->c->reportService()->runReport('/reports/osTicket/HelpTopics', $report_format, null, null, $controls);
+		$this->renderer->render_view($report, $report_format);
 	}
 }
 ?>
