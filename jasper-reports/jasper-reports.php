@@ -27,7 +27,11 @@ spl_autoload_register (array (
 		'autoload' 
 ));
 class JasperReportPlugin extends Plugin {
+	
 	var $config_class = 'JasperReportsConfig';
+	public static $jasper_server;
+	public static $jasper_server_ssl;
+	
 		public static function autoload($className) {
 		$className = ltrim ($className, '\\');
 		$fileName = '';
@@ -38,12 +42,13 @@ class JasperReportPlugin extends Plugin {
 			$fileName = str_replace ('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
 		}
 		$fileName .= str_replace ('_', DIRECTORY_SEPARATOR, $className) . '.php';
-		// echo '</br>'.__DIR__.'/'.'</br>';
+		//echo $fileName."</br>";
+		//echo '</br>'.__DIR__.'/'.'</br>';
 		// echo '</br>'.JASPER_REPORTS_PLUGIN_ROOT.'+'.$fileName.'</br>';
-		// echo '</br>'.JASPER_REPORTS_INCLUDE.'+'.$fileName.'</br>';
+		//echo '</br>'.JASPER_REPORTS_INCLUDE.'+'.$fileName.'</br>';
 		// echo '</br>'.JASPER_REPORTS_PLUGIN_ROOT . $fileName.'</br>';
 		if (file_exists (JASPER_REPORTS_INCLUDE . $fileName)) {
-			require $fileName;
+			require_once $fileName;
 		}
 	}
 	static public function callbackDispatch($object, $data) {
@@ -51,7 +56,6 @@ class JasperReportPlugin extends Plugin {
 			jaspercontroller in the pattern is the same as the file namespace;
 			I needed the trailing slash in my url;
 		*/
-		
 		$search_url = url ('^/jasper-reports/', 
 			patterns ('controller\jaspercontroller', 
 				url_get ('^search$', 'searchAction'),
@@ -86,6 +90,11 @@ class JasperReportPlugin extends Plugin {
 	//bootstrap required by interface
 	function bootstrap(){
 		global $ost;
+		
+		// Set the url so other code can find it.
+		self::$jasper_server = $this->getConfig()->get('url_jasper_server');
+		self::$jasper_server_ssl = $this->getConfig()->get('ssl_jasper_server');
+		
 	  if ($this->firstRun ()) {
             if (! $this->configureFirstRun ()) {
                 return false;
