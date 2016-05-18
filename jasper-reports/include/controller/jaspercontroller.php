@@ -9,7 +9,6 @@ use Jaspersoft\Client\Client;
 use Jaspersoft\Service\Criteria\RepositorySearchCriteria;
 use views\JasperRenderView;
 
-
 class JasperController extends JasperMasterController {
 	private $renderer;
 	
@@ -23,6 +22,7 @@ class JasperController extends JasperMasterController {
 						"jasperadmin"
 					);
 		$this->renderer = new JasperRenderView();
+
     }
 	public function searchAction(){
 		global $ost, $msg, $cfg; //I had to put these in all the functions
@@ -33,7 +33,7 @@ class JasperController extends JasperMasterController {
 	}
 
 	public function getTicketStats(){
-		global $ost, $msg, $cfg;
+		
 		
 		$ost->setPluginInstance(OST_WEB_ROOT.'scp/');  //based upon my changing the $ost class
 
