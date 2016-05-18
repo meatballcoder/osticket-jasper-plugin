@@ -11,16 +11,9 @@ class Autoloader {
 				$fileName = str_replace ('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
 			}
 			$fileName .= str_replace ('_', DIRECTORY_SEPARATOR, $className) . '.php';
-			echo $fileName."</br>";
-			//echo '</br>'.__DIR__.'/'.'</br>';
-			// echo '</br>'.JASPER_REPORTS_PLUGIN_ROOT.'+'.$fileName.'</br>';
-			echo '</br>'.JASPER_REPORTS_INCLUDE.'+'.$fileName.'</br>';
-			// echo '</br>'.JASPER_REPORTS_PLUGIN_ROOT . $fileName.'</br>';
 			if (file_exists (JASPER_REPORTS_INCLUDE . $fileName)) {
-				echo 'i exist';
 				require_once $fileName;
 			}
-			echo 'bye';
 	}
 }
 spl_autoload_register('Autoloader::loader');
