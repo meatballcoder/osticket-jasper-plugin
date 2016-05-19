@@ -1,4 +1,4 @@
-# osticket-jasper-plugin
+# osticket-jasper-plugin beta 1.0.0
 
 This is a Jasper Reports plugin for osTicket 1.9.x.  It has been used with Community Edition or Jasper Reports Server.  
 
