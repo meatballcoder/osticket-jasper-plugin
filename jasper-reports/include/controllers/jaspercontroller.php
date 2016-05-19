@@ -9,17 +9,25 @@ use Jaspersoft\Client\Client;
 use Jaspersoft\Service\Criteria\RepositorySearchCriteria;
 use views\JasperRenderView;
 
+
 class JasperController extends JasperMasterController {
 	private $renderer;
 	
 	private $c;
+	private $current_jasper_server;
+	private $current_jasper_username;
+	private $current_jasper_password;
 	
 	function __construct() {
 		global $ost, $msg, $cfg; //I had to put these in all the functions
+		$this->current_jasper_server=\JasperReportPlugin::$jasper_server;
+		$this->current_jasper_username=\JasperReportPlugin::$jasper_server_username;
+		$this->current_jasper_password=\JasperReportPlugin::$jasper_server_password;
+		
 		$this->c = new Client(
-						"http://localhost:8080/jasperserver",
-						"jasperadmin",
-						"jasperadmin"
+						$this->current_jasper_server,
+						$this->current_jasper_username,
+						$this->current_jasper_password
 					);
 		$this->renderer = new JasperRenderView();
     }
