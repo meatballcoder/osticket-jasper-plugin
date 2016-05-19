@@ -17,12 +17,14 @@ class JasperController extends JasperMasterController {
 	private $current_jasper_server;
 	private $current_jasper_username;
 	private $current_jasper_password;
+	private $current_jasper_report_path;
 	
 	function __construct() {
 		global $ost, $msg, $cfg; //I had to put these in all the functions
 		$this->current_jasper_server=\JasperReportPlugin::$jasper_server;
 		$this->current_jasper_username=\JasperReportPlugin::$jasper_server_username;
 		$this->current_jasper_password=\JasperReportPlugin::$jasper_server_password;
+		$this->current_jasper_report_path=\JasperReportPlugin::$jasper_server_report_path;
 		
 		$this->c = new Client(
 						$this->current_jasper_server,
@@ -70,10 +72,16 @@ class JasperController extends JasperMasterController {
 		$this->renderer->render_view($report, $report_format);
 	}
 	public function getReportsAvailable(){
-		
+				
 		// Search for specific items in repository
 		$criteria = new RepositorySearchCriteria();
-		$criteria->folderUri="/reports/osTicket";
+		
+		//example
+		//$criteria->folderUri="/reports/osTicket";
+		
+		$criteria->folderUri=$this->current_jasper_report_path;
+		
+		//in case you need it
 		//$criteria->q = "";
 		 
 		//it brings back objects, so no need to convert any json;
