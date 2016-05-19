@@ -9,7 +9,7 @@
 /**
  * Jasper Reports Plugin for osTicket 1.9.x
  *
- * @author meatballcoder on github
+ * @author meatballcoder on github based heavily on the ostEquipment plugin
  */
 
 require_once(INCLUDE_DIR.'class.plugin.php');
@@ -36,6 +36,18 @@ class JasperReportsConfig extends PluginConfig{
                 'label' => 'Use SSL?',
                  'configuration' => array(
                     'desc' => 'Use the correct porta in the URL above, i.e. 8443.')  
+            )),
+			    'username_jasper_server' => new TextboxField (array(
+                'id'    => 'username_jasper_server',
+                'label' => 'Jasper Server Username?',
+                 'configuration' => array(
+                    'desc' => 'Enter the password you wish to use for the Jasper Server above.')  
+            )),
+			    'password_jasper_server' => new TextboxField (array(
+                'id'    => 'password_jasper_server',
+                'label' => 'Jasper Server Password',
+                 'configuration' => array(
+                    'desc' => 'Enter the password you wish to use for the Jasper Server above.')
             )),
                        
     );
