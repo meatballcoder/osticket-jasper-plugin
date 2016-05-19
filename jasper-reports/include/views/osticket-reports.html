@@ -1,8 +1,3 @@
-
-
-
-<!-- Datepicker -->
-
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 <form class="form-inline" action="jasper-stats" method="POST">
@@ -18,9 +13,13 @@
       <label  class="sr-only" class="control-label col-sm-offset-2 col-sm-3" for="report_name">Report</label>
       <div class="col-sm-2 col-md-2">
         <select name="report_name" id="report_name" class="form-control">
-          <option>Topics by Date Range</option>
-          <option>idk</option>
-          <option>idk</option>
+		<?PHP
+			foreach ($reports_available->items as $reports_list):
+		?>
+          <option value='<?PHP echo $reports_list->uri; ?>'><?PHP echo $reports_list->label; ?></option>
+		<?PHP
+			endforeach;
+		 ?>
         </select> 
       </div>
     </div>
