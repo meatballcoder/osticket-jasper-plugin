@@ -37,13 +37,13 @@ class JasperReportsConfig extends PluginConfig{
                  'configuration' => array(
                     'desc' => 'Use the correct porta in the URL above, i.e. 8443.')  
             )),
-			    'username_jasper_server' => new TextboxField (array(
+		'username_jasper_server' => new TextboxField (array(
                 'id'    => 'username_jasper_server',
                 'label' => 'Jasper Server Username?',
                  'configuration' => array(
                     'desc' => 'Enter the password you wish to use for the Jasper Server above.')  
             )),
-			    'password_jasper_server' => new TextboxField (array(
+		'password_jasper_server' => new TextboxField (array(
                 'id'    => 'password_jasper_server',
                 'label' => 'Jasper Server Password',
                  'configuration' => array(
