@@ -21,6 +21,7 @@ define ('JASPER_REPORTS_OSTICKET_PLUGIN_VERSION', '0.1');
 define ('JASPER_REPORTS_PLUGIN_ROOT', __DIR__ . '/');
 define ('JASPER_REPORTS_INCLUDE', JASPER_REPORTS_PLUGIN_ROOT.'include/');
 define ('JASPER_REPORTS_VIEWS', JASPER_REPORTS_INCLUDE . 'views/');
+define ('JASPER_REPORTS_CONTROLLERS', JASPER_REPORTS_INCLUDE . 'controllers/');
 define ('JASPER_REPORTS_ASSETS', JASPER_REPORTS_PLUGIN_ROOT . 'assets/');
 spl_autoload_register (array (
 		'JasperReportPlugin',
@@ -31,7 +32,7 @@ class JasperReportPlugin extends Plugin {
 	var $config_class = 'JasperReportsConfig';
 	public static $jasper_server;
 	public static $jasper_server_ssl;
-	
+
 		public static function autoload($className) {
 		$className = ltrim ($className, '\\');
 		$fileName = '';
@@ -42,11 +43,6 @@ class JasperReportPlugin extends Plugin {
 			$fileName = str_replace ('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
 		}
 		$fileName .= str_replace ('_', DIRECTORY_SEPARATOR, $className) . '.php';
-		//echo $fileName."</br>";
-		//echo '</br>'.__DIR__.'/'.'</br>';
-		// echo '</br>'.JASPER_REPORTS_PLUGIN_ROOT.'+'.$fileName.'</br>';
-		//echo '</br>'.JASPER_REPORTS_INCLUDE.'+'.$fileName.'</br>';
-		// echo '</br>'.JASPER_REPORTS_PLUGIN_ROOT . $fileName.'</br>';
 		if (file_exists (JASPER_REPORTS_INCLUDE . $fileName)) {
 			require_once $fileName;
 		}
@@ -56,14 +52,16 @@ class JasperReportPlugin extends Plugin {
 			jaspercontroller in the pattern is the same as the file namespace;
 			I needed the trailing slash in my url;
 		*/
+		
+		
 		$search_url = url ('^/jasper-reports/', 
-			patterns ('controller\jaspercontroller', 
+			patterns ('controllers\jaspercontroller', 
 				url_get ('^search$', 'searchAction'),
 				url_post ('^jasper-stats$', 'getTicketStats')
 			)
 		);
 
-		
+
 		//the truth is I ended up having to dump all my resources into the assets folder.  some of these would work while others didn't;
 		//frustrated I put them in one folder.  it doesn't change much;
 		//this captures the group .* and names it url; This is a php regex sub pattern.
@@ -83,17 +81,15 @@ class JasperReportPlugin extends Plugin {
 		$object->append ($jasper_media_url);
 
 		$object->append ($search_url);
-		
 
 	}
 
 	//bootstrap required by interface
 	function bootstrap(){
-		global $ost;
-		
-		// Set the url so other code can find it.
+					// Set the url so other code can find it.
 		self::$jasper_server = $this->getConfig()->get('url_jasper_server');
 		self::$jasper_server_ssl = $this->getConfig()->get('ssl_jasper_server');
+
 		
 	  if ($this->firstRun ()) {
             if (! $this->configureFirstRun ()) {
