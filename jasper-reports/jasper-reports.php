@@ -28,10 +28,14 @@ spl_autoload_register (array (
 		'autoload' 
 ));
 class JasperReportPlugin extends Plugin {
-	
+
 	var $config_class = 'JasperReportsConfig';
+
 	public static $jasper_server;
 	public static $jasper_server_ssl;
+	public static $jasper_server_username;
+	public static $jasper_server_password;
+	public static $jasper_server_report_path;
 
 		public static function autoload($className) {
 		$className = ltrim ($className, '\\');
@@ -86,9 +90,7 @@ class JasperReportPlugin extends Plugin {
 
 	//bootstrap required by interface
 	function bootstrap(){
-					// Set the url so other code can find it.
-		self::$jasper_server = $this->getConfig()->get('url_jasper_server');
-		self::$jasper_server_ssl = $this->getConfig()->get('ssl_jasper_server');
+
 
 		
 	  if ($this->firstRun ()) {
@@ -101,7 +103,12 @@ class JasperReportPlugin extends Plugin {
         }
 
         $config = $this->getConfig ();
-
+		self::$jasper_server = $config->get('url_jasper_server');
+		self::$jasper_server_ssl = $config->get('ssl_jasper_server');
+		self::$jasper_server_username = $config->get('username_jasper_server');
+		self::$jasper_server_password = $config->get('password_jasper_server');
+		self::$jasper_server_report_path = $config->get('report_path_jasper_server');
+		
         if ($config->get ('url_jasper_server')) {
             $this->createStaffMenu ();
         }
@@ -115,6 +122,8 @@ class JasperReportPlugin extends Plugin {
      * Creates menu links in the staff backend.
      */
     function createStaffMenu() {
+				// Set the url so other code can find it.
+	
         Application::registerStaffApp ('Jasper Reports', 'dispatcher.php/jasper-reports/search', array (
                 iconclass => 'faq-categories' 
        ));
