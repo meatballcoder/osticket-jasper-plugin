@@ -1,5 +1,5 @@
 <?PHP
-namespace controller;
+namespace controllers;
 		
 
 require_once JASPER_REPORTS_PLUGIN_ROOT . "/vendor/autoload.php";
